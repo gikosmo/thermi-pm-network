@@ -1,0 +1,8 @@
+# Raw daily downloads can get large; keep them out of git by default.
+# Comment this out if you want full history of raw data in the repo.
+data/raw/
+data/results/
+
+__pycache__/
+*.pyc
+.venv/

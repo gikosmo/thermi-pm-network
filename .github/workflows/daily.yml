@@ -1,0 +1,63 @@
+name: Daily PurpleAir QC run
+
+on:
+  schedule:
+    # Runs once a day. fetch_data.py's rolling window always spans "now"
+    # backwards (24h / 168h), so the exact time of day doesn't matter —
+    # "Last day" and "Last 7 days" will simply end at whatever time this
+    # job happens to run. Offset a few minutes past the hour to avoid
+    # GitHub's busiest scheduling window right at :00.
+    - cron: "3 7 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Rolling window length in days (default 7)"
+        required: false
+        default: "7"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  fetch-and-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch + analyze (rolling window)
+        env:
+          PURPLEAIR_API_KEY: ${{ secrets.PURPLEAIR_API_KEY }}
+        run: python scripts/backfill.py --days "${{ github.event.inputs.days || '7' }}"
+
+      - name: Commit updated dashboard data
+        run: |
+          git config user.name "purpleair-qc-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/data
+          git diff --staged --quiet || git commit -m "Daily QC run: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: fetch-and-analyze
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

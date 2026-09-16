@@ -1,0 +1,220 @@
+{
+  "network_name": "ThermiAir",
+  "station_source": {
+    "_comment": "Sensor selection for this network is an explicit ID list (from the municipality's station spreadsheet), not a bounding box like PatrasAir. Regenerate this list with scripts/build_station_list.py whenever the spreadsheet changes.",
+    "list_file": "data/thermi_station_list.csv"
+  },
+  "station_ids": [
+    101487,
+    30777,
+    101567,
+    165629,
+    101477,
+    30601,
+    165609,
+    30761,
+    30599,
+    101433,
+    165591,
+    165623,
+    165607,
+    97809,
+    101613,
+    96025,
+    311249,
+    14835,
+    30605,
+    165601,
+    30597,
+    14999,
+    296307,
+    101473,
+    101599,
+    101595,
+    101535
+  ],
+  "history": {
+    "average_minutes": 10,
+    "_comment": "PurpleAir 'average' param: 0=raw(~2min),10,30,60,360(6h),1440(1day)"
+  },
+  "thresholds": {
+    "offline_hours": 2,
+    "r2_warning": 0.9,
+    "r2_fault": 0.7,
+    "slope_warning_low": 0.85,
+    "slope_warning_high": 1.15,
+    "slope_fault_low": 0.5,
+    "slope_fault_high": 2.0,
+    "min_paired_points": 20,
+    "_comment": "min_paired_points = minimum simultaneous A&B readings required to trust the regression for that day. Same starting defaults as PatrasAir -- tune against a few weeks of Thermi's own data."
+  },
+  "output": {
+    "raw_dir": "data/raw",
+    "results_dir": "data/results",
+    "site_data_dir": "site/data"
+  },
+  "stations": [
+    {
+      "sensor_index": 101487,
+      "name": "1o GEL Mikras outdoor",
+      "latitude": 40.47303217,
+      "longitude": 22.96891265
+    },
+    {
+      "sensor_index": 30777,
+      "name": "1o Lykeio Thermis",
+      "latitude": 40.54803787,
+      "longitude": 23.01329485
+    },
+    {
+      "sensor_index": 101567,
+      "name": "Thermi-2 dim",
+      "latitude": 40.54517437,
+      "longitude": 23.02314771
+    },
+    {
+      "sensor_index": 165629,
+      "name": "2o Dimotiko Trilofou",
+      "latitude": 40.466914,
+      "longitude": 22.96492275
+    },
+    {
+      "sensor_index": 101477,
+      "name": "2o GEL Mikras outdoor",
+      "latitude": 40.5237323,
+      "longitude": 22.99513101
+    },
+    {
+      "sensor_index": 30601,
+      "name": "Agia Paraskevi",
+      "latitude": 40.48098239,
+      "longitude": 23.04803744
+    },
+    {
+      "sensor_index": 165609,
+      "name": "Dhmotiko Tagaradon",
+      "latitude": 40.48684615,
+      "longitude": 23.02080993
+    },
+    {
+      "sensor_index": 30761,
+      "name": "Dimotiko Peristeras",
+      "latitude": 40.54989509,
+      "longitude": 23.16588452
+    },
+    {
+      "sensor_index": 30599,
+      "name": "Fragma Thermis",
+      "latitude": 40.5542132,
+      "longitude": 23.0415435
+    },
+    {
+      "sensor_index": 101433,
+      "name": "Gimnasio Vasilikon outdoor",
+      "latitude": 40.48178748,
+      "longitude": 23.12368328
+    },
+    {
+      "sensor_index": 165591,
+      "name": "KAPI Trilofoy",
+      "latitude": 40.46816794,
+      "longitude": 22.96912277
+    },
+    {
+      "sensor_index": 165623,
+      "name": "Kardia",
+      "latitude": 40.46832478,
+      "longitude": 22.99460481
+    },
+    {
+      "sensor_index": 165607,
+      "name": "Livadi",
+      "latitude": 40.52195025,
+      "longitude": 23.22153389
+    },
+    {
+      "sensor_index": 97809,
+      "name": "Nea Raidestos",
+      "latitude": 40.52438407,
+      "longitude": 23.05121996
+    },
+    {
+      "sensor_index": 101613,
+      "name": "Neo Rysio 2023",
+      "latitude": 40.4982755,
+      "longitude": 22.98841995
+    },
+    {
+      "sensor_index": 96025,
+      "name": "Agios Antonios",
+      "latitude": 40.43537556,
+      "longitude": 23.09253317
+    },
+    {
+      "sensor_index": 311249,
+      "name": "Plagiari Paidikos Stathmos",
+      "latitude": 40.47517821,
+      "longitude": 22.95980446
+    },
+    {
+      "sensor_index": 14835,
+      "name": "Thermi",
+      "latitude": 40.546102,
+      "longitude": 23.0193334
+    },
+    {
+      "sensor_index": 30605,
+      "name": "Thermi Tavaki 2",
+      "latitude": 40.5490037,
+      "longitude": 23.0195722
+    },
+    {
+      "sensor_index": 165601,
+      "name": "Thermi-Cultural Center",
+      "latitude": 40.5489282,
+      "longitude": 23.02297045
+    },
+    {
+      "sensor_index": 30597,
+      "name": "Triadi Artemidos",
+      "latitude": 40.549482,
+      "longitude": 23.045501
+    },
+    {
+      "sensor_index": 14999,
+      "name": "Vasilika",
+      "latitude": 40.47898042,
+      "longitude": 23.13627636
+    },
+    {
+      "sensor_index": 296307,
+      "name": "Vasilika Sinetairismos",
+      "latitude": 40.48226862,
+      "longitude": 23.13603101
+    },
+    {
+      "sensor_index": 101473,
+      "name": "2o GEL MIKRAS indoor",
+      "latitude": 40.52378714,
+      "longitude": 22.99552859
+    },
+    {
+      "sensor_index": 101599,
+      "name": "1o GEL Mikras indoor",
+      "latitude": 40.47295875,
+      "longitude": 22.96896381
+    },
+    {
+      "sensor_index": 101595,
+      "name": "1o Gymnasio Thermis indoor",
+      "latitude": 40.54907606,
+      "longitude": 23.01435814
+    },
+    {
+      "sensor_index": 101535,
+      "name": "Gimnasio Vasilikon indoor",
+      "latitude": 40.48241279,
+      "longitude": 23.12410519
+    }
+  ]
+}
