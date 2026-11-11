@@ -4,10 +4,11 @@ station spreadsheet (data/thermi_station_list.csv — a plain CSV export of
 the "ThermiStationList" workbook: SN, ID, Name, PAir Name, Installation,
 Uninstalled, MacAdress, Lat, long, Lat Fake, Long Fake).
 
-A station counts as "active" (included) when its Uninstalled column is
-blank or "-". Any other value (a date, "archived", "???") marks it retired
-and it's excluded. Rows with no MAC address (test/placeholder rows like
-"GET_Test_07") are also excluded.
+A station counts as "active" (included) only when its Uninstalled column
+is exactly "-". Any other value -- blank, a date, "??", "???", "archived",
+etc. -- marks it retired/uninstalled/unclear and it's excluded. Rows with
+no MAC address (test/placeholder rows like "GET_Test_07") are also
+excluded.
 
 Coordinates come from the spreadsheet's real "Lat"/"long" columns (never
 the "Lat Fake"/"Long Fake" columns) and are written into config.json's
@@ -71,7 +72,7 @@ def load_stations(csv_path: Path) -> tuple[list[dict], list[dict]]:
             # but is a real active sensor) -- analyze.py already handles sensors with no
             # location by simply excluding them from the nearest-neighbor comparison.
             is_placeholder = (not sensor_id.isdigit()) or mac in ("", "-")
-            is_active = uninstalled in ("", "-")
+            is_active = uninstalled == "-"
 
             if is_placeholder:
                 log.info("Skipping placeholder/test row: %s (%s)", entry["name"], sn)
